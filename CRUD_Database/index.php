@@ -34,7 +34,7 @@ if ($btn_set) {
         $error_message = "All fields are required !!";
     } elseif (str_word_count($name) < 2) {
         $error_message = "Name must be at least 2 words !!";
-    } elseif ($grade <= "A" || $grade > "F") {
+    } elseif ($grade > "F") {
         $error_message = "Grade must be between A to F.";
     } elseif (!preg_match("/^\d{10}$/", $phone)) {
         $error_message = "Phone number must be exactly 10 digits !!";
@@ -85,7 +85,7 @@ if (isset($_REQUEST["update"])) {
 
     <style>
         body {
-            background: #f8f9fa;
+            background:rgb(243, 243, 243);
             font-family: 'Arial', sans-serif;
         }
 
@@ -93,16 +93,57 @@ if (isset($_REQUEST["update"])) {
             background-color: #007bff;
             color: white;
         }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        .form-div {
+            background-color: white;
+            display: block;
+            margin: auto;
+            margin-top: 20px;
+            max-width: 430px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .title-div {
+            display: block;
+            background-color: #007bff;
+            padding-top: 1px;
+            padding-bottom: 1px;
+            border-radius: 8px;
+        }
+
+        .form {
+            margin: 20px;
+        }
+
+        center button {
+            margin-bottom: 20px;
+        }
+
+        .details-div {
+            margin: 20px;
+            margin-top: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            width: 1200px;
+        }
     </style>
 
 
 </head>
 
 <body>
-    <div class="mx-auto p-2" style="width: 400px;">
-        <h1 style="text-align: center;">Student Registration Form</h1>
+    <div class="form-div">
+        <div class="title-div">
+            <h2 style="text-align: center; color: white;">Student Registration Form</h2>
+        </div>
 
-        <form method="POST">
+        <form method="POST" class="form">
             <?php if (!empty($error_message)) { ?>
                 <div align="center" class="error-message" style="color: red;"> <?php echo $error_message; ?> </div>
             <?php } ?>
@@ -128,46 +169,47 @@ if (isset($_REQUEST["update"])) {
         </form>
     </div>
 
-    <hr>
 
-    <div class="mx-auto p-2" style="width: 1200px;">
-        <table class="table table-striped">
-            <thead>
-                <tr align="center">
-                    <th scope="col">ID</th> <!-- style="color: white; background-color: #007bff;" -->
-                    <th scope="col">Full Name</th>
-                    <th scope="col">Course</th>
-                    <th scope="col">Grade</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($data = mysqli_fetch_assoc($res)) { ?>
+    <center>
+        <div class="details-div">
+            <table class="table table-striped">
+                <thead>
                     <tr align="center">
-                        <th scope="row"><?php echo $data["id"]; ?></th>
-                        <td><?php echo $data["name"]; ?></td>
-                        <td><?php echo $data["course"]; ?></td>
-                        <td><?php echo $data["grade"]; ?></td>
-                        <td><?php echo $data["phone"]; ?></td>
-                        <td>
-                            <form method="REQUEST">
-                                <input type="hidden" name="selectedId" value="<?php echo $data["id"] ?>">
-                                <input type="hidden" name="selectedName" value="<?php echo $data["name"] ?>">
-                                <input type="hidden" name="selectedCourse" value="<?php echo $data["course"] ?>">
-                                <input type="hidden" name="selectedGrade" value="<?php echo $data["grade"] ?>">
-                                <input type="hidden" name="selectedPhone" value="<?php echo $data["phone"] ?>">
-                                <button name="update" type="submit" class="btn btn-outline-success" style="width: 150px; height: 40px">Update</button>
-                                &nbsp;&nbsp;
-                                <button name="delete" type="submit" class="btn btn-outline-danger" style="width: 150px; height: 40px">Delete</button>
-
-                            </form>
-                        </td>
+                        <!-- <th scope="col">ID</th> style="color: white; background-color: #007bff;" -->
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Grade</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Action</th>
                     </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    <?php while ($data = mysqli_fetch_assoc($res)) { ?>
+                        <tr align="center">
+                            <!-- <th scope="row"><?php echo $data["id"]; ?></th> -->
+                            <td><?php echo $data["name"]; ?></td>
+                            <td><?php echo $data["course"]; ?></td>
+                            <td><?php echo $data["grade"]; ?></td>
+                            <td><?php echo $data["phone"]; ?></td>
+                            <td>
+                                <form method="REQUEST">
+                                    <input type="hidden" name="selectedId" value="<?php echo $data["id"] ?>">
+                                    <input type="hidden" name="selectedName" value="<?php echo $data["name"] ?>">
+                                    <input type="hidden" name="selectedCourse" value="<?php echo $data["course"] ?>">
+                                    <input type="hidden" name="selectedGrade" value="<?php echo $data["grade"] ?>">
+                                    <input type="hidden" name="selectedPhone" value="<?php echo $data["phone"] ?>">
+                                    <button name="update" type="submit" class="btn btn-outline-success" style="width: 150px; height: 40px">Update</button>
+                                    &nbsp;&nbsp;
+                                    <button name="delete" type="submit" class="btn btn-outline-danger" style="width: 150px; height: 40px">Delete</button>
+
+                                </form>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </center>
 
 
 
