@@ -23,7 +23,7 @@ if (isset($_POST["update"])) {
         $error_message = "All fields are required !!";
     } elseif (str_word_count($name) < 2) {
         $error_message = "Name must be at least 2 words !!";
-    } elseif ($grade <= "A" || $grade > "F") {
+    } elseif ($grade > "F") {
         $error_message = "Grade must be between A to F.";
     } elseif (!preg_match("/^\d{10}$/", $phone)) {
         $error_message = "Phone number must be exactly 10 digits !!";
@@ -44,25 +44,60 @@ if (isset($_POST["update"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registarion Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
     <style>
+        body {
+            background: rgb(243, 243, 243);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
         th {
             background-color: blue;
-            /* Set background color */
             color: blue;
-            /* Set text color */
             text-align: center;
-            /* Optional: align text to the center */
+        }
+
+        .form-div {
+            background-color: white;
+            display: block;
+            margin: auto;
+            /* margin-top: 20px; */
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+        }
+
+        .form {
+            margin: 20px;
+        }
+
+        .title-div {
+            display: block;
+            background-color: #007bff;
+            padding-top: 8px;
+            padding-bottom: 1px;
+            border-radius: 8px;
+        }
+
+        center button {
+            width: 450px;
+            margin-bottom: 20px;
         }
     </style>
 
 </head>
 
 <body>
-    <div class="mx-auto p-2" style="width: 400px;">
-        <h1 style="text-align: center;">Update Details</h1>
+    <div class="form-div">
+        <div class="title-div">
+            <h2 style="text-align: center; color: white;">Update Details</h2>
+        </div>
 
-        <form method="POST">
+        <form method="POST" class="form">
             <?php if (!empty($error_message)) { ?>
                 <div align="center" class="error-message" style="color: red;"> <?php echo $error_message; ?> </div>
             <?php } ?>
@@ -83,7 +118,7 @@ if (isset($_POST["update"])) {
                 <input type="tel" class="form-control" id="phone" name="phone" value="<?php echo $phone ?>">
             </div>
             <center>
-                <button type="submit" class="btn btn-outline-primary" name="update" style="width: 386px;">Update</button>
+                <button type="submit" class="btn btn-outline-primary" name="update">Update</button>
             </center> <!-- btn btn-primary -->
         </form>
     </div>
