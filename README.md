@@ -19,5 +19,5 @@
 - <b>Backend</b> : PHP for server-side processing. MySQL for database management. Styling: A clean and modern user interface with animations and gradients.
 
 <div align="center">
-<videosrc="https://github.com/user-attachments/assets/eb4efa30-6840-42d3-b6d1-8ceccf5ecdc1"/>
+<video src="https://github.com/user-attachments/assets/eb4efa30-6840-42d3-b6d1-8ceccf5ecdc1"/>
 </div>
